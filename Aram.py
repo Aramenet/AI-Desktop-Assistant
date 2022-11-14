@@ -7,7 +7,6 @@ import webbrowser
 import os
 import winshell
 import pyjokes
-import smtplib
 import ctypes
 import time
 import requests
@@ -19,8 +18,6 @@ from PIL import Image
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)
-
-
 
 def speak(audio):
     engine.say(audio)
@@ -76,14 +73,6 @@ def takeCommand():
 
     return query
 
-def sendEmail(to, content):
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.ehlo()
-    server.starttls()
-    server.login('aryaman.seksaria@gmail.com', 'aJKLm_1947')
-    server.sendmail('aryaman.seksaria@gmail.com', to, content)
-    server.close()
-
 def try1():
     clear = lambda: os.system('cls')
     clear()
@@ -108,37 +97,9 @@ def try1():
             speak("Here you go to Google\n")
             webbrowser.open("google.com")
 
-        elif 'open stackoverflow' in query:
-            speak("Here you go to Stack Over flow.Happy coding\n")
-            webbrowser.open("stackoverflow.com")
-
-
         elif "the time" in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
             speak(f"The time is {strTime}")
-
-        elif 'email to Aryaman' in query:
-            try:
-                speak("What should I say?")
-                content = takeCommand()
-                to = "Receiver email address"
-                sendEmail(to, content)
-                speak("Email has been sent !")
-            except Exception as e:
-                print(e)
-                speak("I am not able to send this email")
-
-        elif 'send a mail' in query:
-            try:
-                speak("What should I say?")
-                content = takeCommand()
-                speak("whom should I send it to?")
-                to = input()
-                sendEmail(to, content)
-                speak("Email has been sent !")
-            except Exception as e:
-                print(e)
-                speak("I am not able to send this email")
 
         elif 'how are you' in query:
             speak("I am fine, Thank you")
@@ -275,34 +236,6 @@ def try1():
             wishMe()
             speak("Aram 1 point o in your service")
             speak(assname)
-
-        elif "weather" in query:
-            api_key = "b5085d9a86031ed9f9c8b39c48dfd623"
-            base_url = "http://api.openweathermap.org / data / 2.5 / weather?"
-            speak(" City name ")
-            print("City name : ")
-            city_name = takeCommand()
-            complete_url = base_url + "appid =" + api_key + "&q =" + city_name
-            response = requests.get(complete_url)
-            x = response.json()
-
-            if x["code"] != "404":
-                y = x["main"]
-                current_temperature = y["temp"]
-                current_pressure = y["pressure"]
-                current_humidiy = y["humidity"]
-                z = x["weather"]
-                weather_description = z[0]["description"]
-                print(" Temperature (in kelvin unit) = " + str(
-                    current_temperature) + "\n atmospheric pressure (in hPa unit) =" + str(
-                    current_pressure) + "\n humidity (in percentage) = " + str(
-                    current_humidiy) + "\n description = " + str(weather_description))
-
-            else:
-                speak(" City Not Found ")
-
-        elif "wikipedia" in query:
-            webbrowser.open("wikipedia.com")
 
         elif "Good Morning" in query:
             speak("A warm" + query)
