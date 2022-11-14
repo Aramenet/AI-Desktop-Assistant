@@ -7,7 +7,6 @@ import webbrowser
 import os
 import winshell
 import pyjokes
-import smtplib
 import ctypes
 import time
 import requests
