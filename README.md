@@ -7,4 +7,3 @@ import packages mentioned in [Install_Packages.txt](https://github.com/Aramenet/
 
 ## Have a GIF saved in your files
 have a gif saved in your Pycharm Projects folder with the correct name in this case as 'assistant.gif'
-
